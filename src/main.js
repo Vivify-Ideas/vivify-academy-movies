@@ -5,6 +5,8 @@ import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 import VueRouter from 'vue-router'
 
+import { store } from './store'
+
 import App from './App.vue'
 import HelloWorld from './components/HelloWorld'
 import AppMovies from './components/AppMovies'
@@ -26,5 +28,6 @@ Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
-  router
+  router,
+  store
 }).$mount('#app')

@@ -8,12 +8,28 @@
       >
         Add Movie
       </router-link>
+
+      <movie-search
+        @search-term-change="setSearchTerm"
+        class="mt-4"
+      />
     </div>
   </nav>
 </template>
 
 <script>
+import MovieSearch from './MovieSearch.vue'
+import { mapMutations } from 'vuex'
+
 export default {
-  name: 'NavBar'
+  name: 'NavBar',
+  components: {
+    MovieSearch
+  },
+  methods: {
+    ...mapMutations([
+      'setSearchTerm'
+    ])
+  }
 }
 </script>

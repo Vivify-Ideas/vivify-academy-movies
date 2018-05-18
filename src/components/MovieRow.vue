@@ -1,7 +1,7 @@
 <template>
   <div
     class="row p-2 mb-1"
-    :class="{ 'bg-dark text-white': selected }"
+    :class="{ 'bg-dark text-white': isSelected }"
   >
     <div class="col-sm" v-text="movie.id"></div>
     <div class="col-sm" v-text="movie.title"></div>
@@ -13,8 +13,9 @@
       <b-button
         type="submit"
         variant="primary"
+        size="sm"
         @click="onSelected">
-        Select
+        Select/Deselect
       </b-button>
     </div>
   </div>
@@ -27,17 +28,22 @@ export default {
     movie: {
       type: Object,
       required: true
+    },
+    selectedMoviesIds: {
+      type: Array,
+      required: true,
+      default: () => []
     }
   },
-  data() {
-    return {
-      selected: false
+  computed: {
+    isSelected() {
+      return this.selectedMoviesIds
+        .indexOf(this.movie.id) > -1
     }
   },
   methods: {
     onSelected() {
-      this.selected = true
-      this.$emit('on-selected-movie', this.movie)
+      this.$emit('on-selected-movie', this.movie, !this.isSelected)
     }
   }
 }
